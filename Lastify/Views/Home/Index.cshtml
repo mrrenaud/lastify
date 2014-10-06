@@ -37,4 +37,28 @@
             </ul>
         </div>
     </div>
+    
+    <div ng-show="showStep(3)" class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Step 3 - We're done ! Now you just have to create your playlist.</h3>
+        </div>
+        <div class="panel-body">
+            <p>We have found <em>{{availableSongs.length}}</em> songs out of the <em>{{songs.length}}</em> from your playlist.</p>
+
+            <p>
+                How many items to display ? <select ng-model="songsRange" ng-options="range for range in songsRangeOptions"></select><br>
+            </p>
+
+            <a ng-click="previousPage()"><i class="glyphicon glyphicon-chevron-left"></i></a> page {{songsPageIndex + 1}} on {{availableSongsPageMaxIndex() + 1}} <a ng-click="nextPage()"><i class="glyphicon glyphicon-chevron-right"></i></a>
+            <ul class="list-group songs">
+                <li ng-repeat="song in paginatedAvailableSongs()" class="list-group-item">
+                    <p>
+                        <i class="glyphicon glyphicon-ok" ng-show="song.isAvailable"></i>
+                        <a href="">{{song.artist}}</a> &mdash; <a href="">{{song.title}}</a>
+                        <i class="glyphicon glyphicon-play-circle" ng-show="song.isAvailable">preview</i>
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
