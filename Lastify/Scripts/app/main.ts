@@ -1,5 +1,6 @@
 ﻿/// <reference path="../typings/jquery/jquery.d.ts" />
 
+
 class Song {
     title: string;
     artist: string;
@@ -28,7 +29,20 @@ $(document).ready(() => {
             r.readAsText(file);
         }
     });
+
+    var client = new ZeroClipboard(document.getElementById("copy-songs"));
+    client.on("ready", function (readyEvent) {
+        // alert( "ZeroClipboard SWF is ready!" );
+
+        client.on("aftercopy", function (event) {
+            // `this` === `client`
+            // `event.target` === the element that was clicked
+            event.target.style.display = "none";
+            alert("Copied text to clipboard: " + event.data["text/plain"]);
+        });
+    });
 });
+
 
 function parseText(content: string, type: string) {
     var lines = content.split('\r\n');

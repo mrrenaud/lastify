@@ -37,13 +37,18 @@
             </ul>
         </div>
     </div>
-    
+
     <div ng-show="showStep(3)" class="panel panel-default">
         <div class="panel-heading">
             <h3>Step 3 - We're done ! Now you just have to create your playlist.</h3>
         </div>
         <div class="panel-body">
             <p>We have found <em>{{availableSongs.length}}</em> songs out of the <em>{{songs.length}}</em> from your playlist.</p>
+
+
+            <p><strong>First</strong>, copy all the songs to your clipboard by clicking on the bellow button.</p>
+            <p><a id="copy-songs" data-clipboard-text="{{songsToCopy}}" class="btn btn-primary">Copy the songs</a></p>
+            <p><strong>Then</strong>, paste it on a newly created playlist on spotify.</p>
 
             <p>
                 How many items to display ? <select ng-model="songsRange" ng-options="range for range in songsRangeOptions"></select><br>

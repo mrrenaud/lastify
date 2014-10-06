@@ -71,9 +71,12 @@ var phonecatApp =
                 };
 
                 $scope.searchNextSong = function () {
+                    if ($scope.step === 3)
+                        return false;
                     if ($scope.searchIndex >= $scope.songs.length) {
                         $scope.setLoading(false);
                         $scope.step = 3;
+                        $scope.songsToCopy = $scope.getURIs();
                         return false;
                     }
 
@@ -103,5 +106,14 @@ var phonecatApp =
 
                     $scope.searchIndex++;
                     return true;
+                };
+
+
+                $scope.getURIs = function () {
+                    var text = '';
+                    for (var index in $scope.availableSongs) {
+                        text += $scope.availableSongs[index].spotifyUri + '\r\n';
+                    }
+                    return text;
                 };
             });
