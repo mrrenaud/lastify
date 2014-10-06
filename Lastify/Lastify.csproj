@@ -199,6 +199,8 @@
     </Content>
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\app\main.js.map" />
+    <Content Include="Content\sass\module\_songslist.scss" />
+    <Content Include="Content\sass\module\_fonts.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

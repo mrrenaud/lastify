@@ -52,6 +52,7 @@ function parseText(content: string, type: string) {
         scope.$apply(function () {
             scope.setLoading(false);
             scope.step = 2;
+            scope.searchOnSpotify();
         });
     }
 }
