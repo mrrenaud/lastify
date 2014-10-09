@@ -93,7 +93,6 @@ var phonecatApp =
                     if ($scope.searchIndex >= $scope.songs.length) {
                         $scope.setLoading(false);
                         $scope.step = 3;
-                        $scope.songsToCopy = $scope.getURIs();
                         return false;
                     }
 
@@ -113,19 +112,28 @@ var phonecatApp =
                             $scope.songs[config.params.index].isAvailable = true;
                             $scope.availableSongs.push($scope.songs[config.params.index]);
                         }
-                        $scope.searchNextSong();
+                        $scope.incrementRequestCounter();
                     }).
                     error(function (data, status, headers, config) {
                         if (data.tracks && data.tracks.items.length) {
                             $scope.songs[config.params.index].isAvailable = false;
                         }
-                        $scope.searchNextSong();
+                        $scope.incrementRequestCounter();
                     });
 
                     $scope.searchIndex++;
                     return true;
                 };
 
+                $scope.requestCount = 0;
+                $scope.incrementRequestCounter = function () {
+                    $scope.requestCount++;
+                    if ($scope.requestCount === $scope.songs.length) {
+                        $scope.songsToCopy = $scope.getURIs();
+                    } else {
+                        $scope.searchNextSong();
+                    }
+                };
 
                 $scope.getURIs = function () {
                     var text = '';
