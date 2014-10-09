@@ -1,4 +1,16 @@
 ﻿.songs {
     padding: 0;
     margin-top: 12px;
+
+    .song-item {
+
+        .btn-preview {
+            padding: 4px 10px 2px;
+            margin-right: 6px;
+
+            i {
+                font-size: 16px;
+            }
+        }
+    }
 }

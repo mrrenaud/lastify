@@ -26,13 +26,12 @@
                 How many items to display ? <select ng-model="songsRange" ng-options="range for range in songsRangeOptions"></select><br>
             </p>
 
-            <a ng-click="previousPage()"><i class="glyphicon glyphicon-chevron-left"></i></a> page {{songsPageIndex + 1}} on {{songsPageMaxIndex() + 1}} <a ng-click="nextPage()"><i class="glyphicon glyphicon-chevron-right"></i></a>
+            <a ng-click="previousPage()"><i class="glyphicon glyphicon-chevron-left"></i></a> page {{songsPageIndex + 1}} on {{songsPageMaxIndex()}} <a ng-click="nextPage()"><i class="glyphicon glyphicon-chevron-right"></i></a>
             <ul class="list-group songs">
                 <li ng-repeat="song in paginatedSongs()" class="list-group-item">
                     <p>
                         <i class="glyphicon glyphicon-ok" ng-show="song.isAvailable"></i>
-                        <a href="">{{song.artist}}</a> &mdash; <a href="">{{song.title}}</a>
-                        <i class="glyphicon glyphicon-play-circle" ng-show="song.isAvailable">preview</i>
+                        {{song.artist}} &mdash; {{song.title}}
                     </p>
                 </li>
             </ul>
@@ -54,14 +53,14 @@
             <p>
                 How many items to display ? <select ng-model="songsRange" ng-options="range for range in songsRangeOptions"></select><br>
             </p>
-
-            <a ng-click="previousPage()"><i class="glyphicon glyphicon-chevron-left"></i></a> page {{songsPageIndex + 1}} on {{availableSongsPageMaxIndex() + 1}} <a ng-click="nextPage()"><i class="glyphicon glyphicon-chevron-right"></i></a>
+            <audio id="preview-player" autoplay hidden src="{{trustPreview(songPlaying)}}"></audio>
+            <a ng-click="previousPage()"><i class="glyphicon glyphicon-chevron-left"></i></a> page {{songsPageIndex + 1}} on {{availableSongsPageMaxIndex()}} <a ng-click="nextPage()"><i class="glyphicon glyphicon-chevron-right"></i></a>
             <ul class="list-group songs">
-                <li ng-repeat="song in paginatedAvailableSongs()" class="list-group-item">
+                <li ng-repeat="song in paginatedAvailableSongs()" class="list-group-item song-item">
                     <p>
-                        <i class="glyphicon glyphicon-ok" ng-show="song.isAvailable"></i>
-                        <a href="">{{song.artist}}</a> &mdash; <a href="">{{song.title}}</a>
-                        <i class="glyphicon glyphicon-play-circle" ng-show="song.isAvailable">preview</i>
+                        <button ng-hide="isPlaying(song)" class="btn btn-info btn-preview" ng-click="playPreview(song)"><i class="glyphicon glyphicon-play-circle"></i></button>
+                        <button ng-hide="!isPlaying(song)" class="btn btn-info btn-preview" ng-click="stopPreview(song)"><i class="glyphicon glyphicon-stop"></i></button>
+                        {{song.artist}} &mdash; {{song.title}}
                     </p>
                 </li>
             </ul>

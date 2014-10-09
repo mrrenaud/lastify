@@ -8,9 +8,26 @@
 
 var phonecatApp =
     angular.
-        module('lastifyApp', ['cfp.loadingBar', 'lastifyFilters']).
-            controller('SongListCtrl', function ($scope, $http, cfpLoadingBar) {
+        module('lastifyApp', ['cfp.loadingBar', 'lastifyFilters', 'ngSanitize']).
+            controller('SongListCtrl', function ($scope, $http, cfpLoadingBar, $sce) {
 
+                $scope.trustPreview = function (song) {
+                    if (!song)
+                        return "";
+                    return $sce.trustAsResourceUrl(song.spotifyPreview);
+                };
+
+                $scope.playPreview = function (song) {
+                    $scope.songPlaying = song;
+                };
+                $scope.stopPreview = function () {
+                    $scope.songPlaying = null;
+                };
+                $scope.isPlaying = function (song) {
+                    return $scope.songPlaying === song;
+                };
+
+                $scope.songPlaying = null;
                 $scope.songs = [];
                 $scope.availableSongs = [];
 
@@ -92,6 +109,7 @@ var phonecatApp =
                         if (data.tracks && data.tracks.items.length) {
                             $scope.songs[config.params.index].spotifyUri = data.tracks.items[0].uri;
                             $scope.songs[config.params.index].spotifyPreview = data.tracks.items[0].preview_url;
+                            $sce.trustAsResourceUrl($scope.songs[config.params.index].spotifyPreview);
                             $scope.songs[config.params.index].isAvailable = true;
                             $scope.availableSongs.push($scope.songs[config.params.index]);
                         }
