@@ -29,12 +29,7 @@ $(document).ready(function () {
     });
 
     ZeroClipboard.config({ swfPath: "/scripts/ZeroClipboard.swf" });
-    var client = new ZeroClipboard(document.getElementById("copy-songs"));
-    client.on("ready", function (readyEvent) {
-        // alert( "ZeroClipboard SWF is ready!" );
-        client.on("aftercopy", function (event) {
-        });
-    });
+    var zeroClipboard = new ZeroClipboard(document.getElementById("copy-songs"));
 });
 
 function parseText(content, type) {
